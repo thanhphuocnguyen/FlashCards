@@ -19,7 +19,6 @@ struct DeckDetailView: View {
     @State private var isConfirmingDelete = false
     
     let deck: Deck
-    private var newCardName = ""
     
     private var visibleCards: [Flashcard] {
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -34,8 +33,7 @@ struct DeckDetailView: View {
     var body: some View {
         List {
             NavigationLink("Practice") {
-                StudyView(cards: deck.cards, mode: .practice)
-                    .navigationTitle("Practice")
+                PracticeSetupView(cards: deck.cards)
             }
             .disabled(deck.cards.isEmpty)
 
@@ -48,7 +46,7 @@ struct DeckDetailView: View {
                 if deck.cards.isEmpty {
                     Text("This deck has no cards yet.")
                         .foregroundStyle(.secondary)
-                } else if !searchText.isEmpty && visibleCards.isEmpty {
+                } else if visibleCards.isEmpty {
                     Text("No matching cards.")
                         .foregroundStyle(.secondary)
                 } else {
@@ -150,6 +148,21 @@ private struct DeckDetailPreview: View {
     }
 }
 
-#Preview {
-    DeckDetailPreview()
+#Preview("Deck detail") {
+    let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(
+        for: Deck.self, Flashcard.self,
+        configurations: configuration
+    )
+
+    let deck = Deck(name: "Chinese Basics", cards: [
+        Flashcard(front: "学", back: "xué\nto learn"),
+        Flashcard(front: "水", back: "shuǐ\nwater")
+    ])
+    container.mainContext.insert(deck)
+
+    return NavigationStack {
+        DeckDetailView(deck: deck)
+    }
+    .modelContainer(container)
 }
