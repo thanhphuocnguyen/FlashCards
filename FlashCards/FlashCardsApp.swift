@@ -6,12 +6,24 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct FlashCardsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                TodayView()
+                    .tabItem( {
+                        Label("Today", systemImage: "calendar")
+                    })
+                ContentView()
+                    .tabItem {
+                        Label("Decks", systemImage: "rectangle.stack")
+                    }
+            }
+            
         }
+        .modelContainer(for: [Deck.self, Flashcard.self])
     }
 }
