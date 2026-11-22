@@ -10,6 +10,7 @@ import SwiftUI
 struct StudyView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var queue: [Flashcard]
     @State private var currentIndex = 0
     @State private var isAnswerVisible = false
@@ -72,11 +73,9 @@ struct StudyView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 
-                Text(direction == .frontFirst ? card.front : card.back)
-                    .font(.largeTitle)
+                studyCard(for: card)
+                
                 if isAnswerVisible {
-                    Text(direction == .frontFirst ? card.back : card.front)
-                        .multilineTextAlignment(.center)
                     if mode == .practice {
                         Button("Next Card") {
                             advance()
@@ -204,10 +203,35 @@ struct StudyView: View {
         isAnswerVisible = false
         completeCards += 1
     }
+    
+    private func studyCard(for card: Flashcard) -> some View {
+        ZStack {
+            FlashcardView(
+                prompt: direction == .frontFirst ? card.front : card.back,
+                answer: direction == .frontFirst ? card.back : card.front,
+                angle: isAnswerVisible ? 180 : 0
+            )
+            .animation(
+                reduceMotion ? nil : .easeInOut(duration: 0.32),
+                value: isAnswerVisible
+            )
+            .id(currentIndex)
+            .transition(
+                reduceMotion ? .identity : .asymmetric(
+                    insertion: .move(edge: .trailing),
+                    removal: .move(edge: .leading)
+                )
+            )
+        }
+        .clipped()
+        .animation(
+            reduceMotion ? nil : .easeInOut(duration: 0.25),
+            value: currentIndex
+        )
+    }
 }
 
 #Preview("Good interval hints") {
-    let now = Date.now
     let newCard = Flashcard(front: "学", back: "xué\nto learn")
     newCard.intervalDays = 0
     let reviewedCard = Flashcard(front: "水", back: "shuǐ\nwater")

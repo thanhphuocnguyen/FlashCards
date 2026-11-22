@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 import UniformTypeIdentifiers
 
-struct ContentView: View {
+struct DeckListView: View {
     @Environment(\.modelContext) private var modelContext
     
     @Query(sort: \Deck.createdAt, order: .reverse)
@@ -28,65 +28,17 @@ struct ContentView: View {
     @State private var deckToDelete: Deck?
     @State private var isConfirmingDeckDelete = false
     
-    @ViewBuilder
-    private func deckTitle(deck: Deck) -> some View {
-        let now = Date.now
-        let total = deck.cards.count
-        let due = deck.cards.count { $0.isDue(at: now)}
-        NavigationLink {
-            DeckDetailView(deck: deck)
-        } label: {
-            VStack(alignment: .leading) {
-                Text(deck.name)
-                Text("\(due) due - \(total) total")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-        }
-    }
     var body: some View {
         NavigationStack {
             List(decks) { deck in
-                deckTitle(deck: deck)
-                    .swipeActions(allowsFullSwipe: false) {
-                        Button(role: .destructive) {
-                            deckToDelete = deck
-                            isConfirmingDeckDelete = true
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                        }
-                    }
+                DeckRow(deck: deck) {
+                    deckToDelete = deck
+                    isConfirmingDeckDelete = true
+                }
             }
             .navigationTitle("Decks")
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("New Deck", systemImage: "plus") {
-                        newDeckName = ""
-                        isShowingNewDeck = true
-                    }
-                }
-                ToolbarItem(placement: .topBarLeading) {
-                    Menu("Backup") {
-                        Button("Export Backup") {
-                            guard !decks.isEmpty else { return }
-                            do {
-                                try prepareBackupIDs()
-                                let encoder = JSONEncoder()
-                                encoder.outputFormatting = .prettyPrinted
-                                let data = try encoder.encode(FlashcardsBackup(decks: decks))
-                                backupDocument = BackupDocument(data: data)
-                                isExportingBackup = true
-                            } catch {
-                                isShowingExportError = true
-                            }
-                        }
-                        
-                        Button("Import Backup") {
-                            isImportingBackup = true
-                            
-                        }
-                    }
-                }
+                deckToolbar
             }
             .alert("New Deck", isPresented: $isShowingNewDeck) {
                 TextField("Deck Name", text: $newDeckName)
@@ -136,6 +88,38 @@ struct ContentView: View {
                 }
             } message: { deck in
                 Text("“\(deck.name)” and all \(deck.cards.count) of its cards will be deleted.")
+            }
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private var deckToolbar: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button("New Deck", systemImage: "plus") {
+                newDeckName = ""
+                isShowingNewDeck = true
+            }
+        }
+        ToolbarItem(placement: .topBarLeading) {
+            Menu("Backup") {
+                Button("Export Backup") {
+                    guard !decks.isEmpty else { return }
+                    do {
+                        try prepareBackupIDs()
+                        let encoder = JSONEncoder()
+                        encoder.outputFormatting = .prettyPrinted
+                        let data = try encoder.encode(FlashcardsBackup(decks: decks))
+                        backupDocument = BackupDocument(data: data)
+                        isExportingBackup = true
+                    } catch {
+                        isShowingExportError = true
+                    }
+                }
+                
+                Button("Import Backup") {
+                    isImportingBackup = true
+                    
+                }
             }
         }
     }
@@ -236,6 +220,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    DeckListView()
         .modelContainer(for: [Deck.self, Flashcard.self], inMemory: true)
 }

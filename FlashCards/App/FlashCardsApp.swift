@@ -17,7 +17,7 @@ struct FlashCardsApp: App {
                     .tabItem( {
                         Label("Today", systemImage: "calendar")
                     })
-                ContentView()
+                DeckListView()
                     .tabItem {
                         Label("Decks", systemImage: "rectangle.stack")
                     }

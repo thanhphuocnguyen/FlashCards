@@ -9,6 +9,10 @@ import SwiftUI
 import SwiftData
 
 struct TodayView: View {
+    @AppStorage("studyRemindersEnabled") private var remindersEnabled = false
+    @State private var isUpdatingReminders = false
+    @State private var reminderMessage = ""
+    @State private var isShowingReminderMessage = false
     @Query private var cards: [Flashcard]
     
     var body: some View {
@@ -40,6 +44,39 @@ struct TodayView: View {
                     }
                     .buttonStyle(.borderedProminent)
                 }
+                
+                Toggle("Study Reminder", isOn: Binding(
+                    get: { remindersEnabled },
+                    set: { enabled in
+                        isUpdatingReminders = true
+                        Task {
+                            defer { isUpdatingReminders = false }
+                            
+                            if enabled {
+                                do {
+                                    remindersEnabled = try await StudyReminders.enable()
+                                    if !remindersEnabled {
+                                        reminderMessage = "Allow FlashCards notification in Settings."
+                                        isShowingReminderMessage = true
+                                    }
+                                } catch {
+                                    reminderMessage = "Couldn't schedule study reminders."
+                                    isShowingReminderMessage = true
+                                }
+                            } else {
+                                StudyReminders.disable()
+                                remindersEnabled = false
+                            }
+                        }
+                    }
+                ))
+                .disabled(isUpdatingReminders)
+                .alert("Study Reminders", isPresented: $isShowingReminderMessage) {
+                    Button("OK", role: .cancel) {}
+                } message: {
+                    Text(reminderMessage)
+                }
+                .padding()
             }
             .padding()
             .navigationTitle("Today")
