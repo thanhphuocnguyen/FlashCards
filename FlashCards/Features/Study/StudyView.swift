@@ -108,20 +108,10 @@ struct StudyView: View {
                     }
                 } else {
                     Button("Show answer") {
-                        isAnswerVisible = true
-                    }
-                    .buttonStyle(.borderedProminent)
-                    
-                    if mode == .practice {
-                        Button("Skip card") {
-                            skippedCards += 1
-                            currentIndex += 1
-                            isAnswerVisible = false
+                            isAnswerVisible = true
                         }
-                    }
-                }
-                
-                
+                        .buttonStyle(.borderedProminent)
+                }                
             } else {
                 if queue.isEmpty {
                     Text(mode == .review ? "No cards due" : "No cards to practice")

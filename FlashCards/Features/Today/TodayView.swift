@@ -24,63 +24,74 @@ struct TodayView: View {
             .min()
         
         NavigationStack {
-            VStack(spacing: 16) {
-                if dueCount == 0 {
-                    if let nextReview {
-                        Text("Next review: \(nextReview.formatted(date: .abbreviated, time: .shortened))")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                    Text(cards.isEmpty ? "Add a card in Decks to get started." : "You're caught up.")
-                } else {
-                    Text(dueCount == 1 ? "1 card due" : "\(dueCount) cards due")
-                        .font(.title2)
-                    
-                    NavigationLink {
-                        StudyView(cards: cards)
-                            .navigationTitle("Review")
-                    } label: {
-                        Text("Start Review")
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-                
-                Toggle("Study Reminder", isOn: Binding(
-                    get: { remindersEnabled },
-                    set: { enabled in
-                        isUpdatingReminders = true
-                        Task {
-                            defer { isUpdatingReminders = false }
-                            
-                            if enabled {
-                                do {
-                                    remindersEnabled = try await StudyReminders.enable()
-                                    if !remindersEnabled {
-                                        reminderMessage = "Allow FlashCards notification in Settings."
-                                        isShowingReminderMessage = true
-                                    }
-                                } catch {
-                                    reminderMessage = "Couldn't schedule study reminders."
-                                    isShowingReminderMessage = true
-                                }
-                            } else {
-                                StudyReminders.disable()
-                                remindersEnabled = false
-                            }
-                        }
-                    }
-                ))
-                .disabled(isUpdatingReminders)
-                .alert("Study Reminders", isPresented: $isShowingReminderMessage) {
-                    Button("OK", role: .cancel) {}
-                } message: {
-                    Text(reminderMessage)
-                }
-                .padding()
+            TimelineView(.periodic(from: .now, by: 15)) { context in
+                todayContent(now: context.date)
             }
-            .padding()
             .navigationTitle("Today")
         }
+    }
+    
+    private func todayContent(now: Date) -> some View {
+        let dueCount = cards.filter { $0.isDue(at: now) }.count
+        let nextReview = cards.compactMap(\.nextReviewAt)
+            .filter { $0 > now }
+            .min()
+        
+        return VStack(spacing: 16) {
+            if dueCount == 0 {
+                if let nextReview {
+                    Text("Next review: \(nextReview.formatted(date: .abbreviated, time: .shortened))")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                Text(cards.isEmpty ? "Add a card in Decks to get started." : "You're caught up.")
+            } else {
+                Text(dueCount == 1 ? "1 card due" : "\(dueCount) cards due")
+                    .font(.title2)
+                
+                NavigationLink {
+                    StudyView(cards: cards)
+                        .navigationTitle("Review")
+                } label: {
+                    Text("Start Review")
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            
+            Toggle("Study Reminder", isOn: Binding(
+                get: { remindersEnabled },
+                set: { enabled in
+                    isUpdatingReminders = true
+                    Task {
+                        defer { isUpdatingReminders = false }
+                        
+                        if enabled {
+                            do {
+                                remindersEnabled = try await StudyReminders.enable()
+                                if !remindersEnabled {
+                                    reminderMessage = "Allow FlashCards notification in Settings."
+                                    isShowingReminderMessage = true
+                                }
+                            } catch {
+                                reminderMessage = "Couldn't schedule study reminders."
+                                isShowingReminderMessage = true
+                            }
+                        } else {
+                            StudyReminders.disable()
+                            remindersEnabled = false
+                        }
+                    }
+                }
+            ))
+            .disabled(isUpdatingReminders)
+            .alert("Study Reminders", isPresented: $isShowingReminderMessage) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(reminderMessage)
+            }
+            .padding()
+        }
+        .padding()
     }
 }
 

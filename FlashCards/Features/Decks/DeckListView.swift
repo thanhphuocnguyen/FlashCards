@@ -173,8 +173,16 @@ struct DeckListView: View {
                 }
                 continue
             }
+            var seenCardIDs = Set<UUID>()
             
-            let cards = snapshot.cards.map { makeCard(from: $0) }
+            let cards = snapshot.cards.compactMap { savedCard -> Flashcard? in
+                if let id = savedCard.backupID,
+                   !seenCardIDs.insert(id).inserted {
+                    return nil
+                }
+                return  makeCard(from: savedCard)
+            }
+
             addedCardCount+=cards.count
             
             let deck = Deck(name: snapshot.name, cards: cards)
