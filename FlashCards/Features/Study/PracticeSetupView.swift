@@ -25,6 +25,7 @@ struct PracticeSetupView: View {
                     shuffle: shuffle
                 )
                 .navigationTitle("Practice")
+                .navigationBarTitleDisplayMode(.inline)
             }
             .disabled(cards.isEmpty)
         }

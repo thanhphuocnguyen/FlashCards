@@ -77,10 +77,8 @@ struct StudyView: View {
                 
                 if isAnswerVisible {
                     if mode == .practice {
-                        Button("Next Card") {
-                            advance()
-                        }
-                    } else {
+                        practiceControls
+                    } else if isAnswerVisible {
                         let layout = dynamicTypeSize.isAccessibilitySize
                         ? AnyLayout(VStackLayout(spacing: 12))
                         : AnyLayout(HStackLayout(spacing: 12))
@@ -90,18 +88,23 @@ struct StudyView: View {
                                 Button("Again") { rate(.again, card: card) }
                                 Text("Now")
                             }
+                            
                             VStack {
-                                
                                 Button("Hard") { rate(.hard, card: card) }
                                 Text("1 day")
                             }
+                            
                             VStack {
                                 Button("Good") { rate(.good, card: card) }
-                                let days = goodInterval(for: card.intervalDays)
-                                Text("\(days) days")
-                            }                    }
+                                Text("\(goodInterval(for: card.intervalDays)) days")
+                            }
+                        }
                         .buttonStyle(.bordered)
-                        
+                    } else {
+                        Button("Show answer") {
+                            isAnswerVisible = true
+                        }
+                        .buttonStyle(.borderedProminent)
                     }
                 } else {
                     Button("Show answer") {
@@ -161,6 +164,32 @@ struct StudyView: View {
             
         }
         .padding()
+    }
+    
+    private var practiceControls: some View {
+        VStack(spacing: 12) {
+            Button {
+                if isAnswerVisible {
+                    advance()
+                } else {
+                    isAnswerVisible = true
+                }
+            } label: {
+                Text(isAnswerVisible ? "Next Card" : "Show Answer")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            
+            Button("Skip Card") {
+                skippedCards += 1
+                currentIndex += 1
+                isAnswerVisible = false
+            }
+            .opacity(isAnswerVisible ? 0 : 1)
+            .disabled(isAnswerVisible)
+            .accessibilityHidden(isAnswerVisible)
+        }
     }
     
     private enum Rating {

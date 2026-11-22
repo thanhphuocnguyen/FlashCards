@@ -40,9 +40,20 @@ struct AddCardView: View {
     var body: some View {
         NavigationStack {
             Form{
-                Text(deckName)
-                TextField("Front", text: $front)
-                TextField("Back", text: $back, axis: .vertical)
+                Section("Deck") {
+                    Text(deckName)
+                        .foregroundStyle(.secondary)
+                }
+                
+                Section("Front") {
+                    TextField("Enter a prompt", text: $front)
+                }
+                
+                Section("Back") {
+                    TextEditor(text: $back)
+                        .frame(minHeight: 100)
+                        .accessibilityLabel("Back of card")
+                }
             }
             .navigationTitle(isEditing ? "Edit Card" :"Add Card")
                 .toolbar {

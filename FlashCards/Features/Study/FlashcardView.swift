@@ -20,11 +20,11 @@ struct FlashcardView: View, Animatable {
     var body: some View {
         let showAnswer = angle >= 90
         ZStack {
-            face("Prompt", text: prompt)
+            face("Prompt", text: prompt, font: .largeTitle)
                 .opacity(showAnswer ? 0 : 1)
                 .accessibilityHidden(showAnswer)
             
-            face("Answer", text: answer)
+            face("Answer", text: answer, font: .title2)
                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                 .opacity(showAnswer ? 1 : 0)
                 .accessibilityHidden(!showAnswer)
@@ -32,14 +32,14 @@ struct FlashcardView: View, Animatable {
         .rotation3DEffect(.degrees(angle), axis: (x: 0, y: 1, z: 0), perspective: 0.5)
     }
     
-    private func face(_ title: String, text: String) -> some View {
+    private func face(_ title: String, text: String, font: Font) -> some View {
         VStack(spacing: 12) {
             Text(title)
                 .font(.caption)
                 .foregroundStyle(.secondary)
             
             Text(text)
-                .font(.title)
+                .font(font)
                 .multilineTextAlignment(.center)
         }
         .padding(24)

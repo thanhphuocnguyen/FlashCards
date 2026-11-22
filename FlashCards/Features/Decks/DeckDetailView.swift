@@ -32,16 +32,19 @@ struct DeckDetailView: View {
     
     var body: some View {
         List {
-            NavigationLink("Practice") {
+            NavigationLink("Review Due Cards") {
+                StudyView(cards: deck.cards)
+                    .navigationTitle(deck.name)
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .disabled(deck.cards.isEmpty)
+
+            NavigationLink("Practice All Cards") {
                 PracticeSetupView(cards: deck.cards)
             }
             .disabled(deck.cards.isEmpty)
 
-            NavigationLink("Study") {
-                StudyView(cards: deck.cards)
-                    .navigationTitle(deck.name)
-            }
-            
+                        
             Section("Cards") {
                 if deck.cards.isEmpty {
                     Text("This deck has no cards yet.")
@@ -54,9 +57,13 @@ struct DeckDetailView: View {
                         Button {
                             cardToEdit = card
                         } label: {
-                            VStack(alignment: .leading) {
+                            VStack(alignment: .leading, spacing: 4) {
                                 Text(card.front)
-                                Text(card.back)
+                                    .font(.headline)
+                                    .foregroundStyle(.primary)
+                                
+                                Text(card.back.split(whereSeparator: \.isNewline).joined(separator: " . "))
+                                    .font(.subheadline)
                                     .foregroundStyle(.secondary)
                                     .lineLimit(1)
                             }
