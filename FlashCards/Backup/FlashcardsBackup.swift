@@ -23,6 +23,7 @@ struct FlashcardsBackup: Codable {
                         backupID: card.backupID,
                         front: card.front,
                         back: card.back,
+                        vocabTypeRawVal: card.vocabTypeRawVal,
                         nextReviewAt: card.nextReviewAt,
                         intervalDays: card.intervalDays
                     )
@@ -42,6 +43,7 @@ struct FlashcardsBackup: Codable {
         let backupID: UUID?
         let front: String
         let back: String
+        let vocabTypeRawVal: String?
         let nextReviewAt: Date?
         let intervalDays: Int?
     }

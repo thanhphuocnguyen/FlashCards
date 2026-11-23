@@ -12,6 +12,17 @@ final class Flashcard {
     var backupID: UUID?
     var front: String
     var back: String
+    var vocabTypeRawVal: String? = nil
+    
+    var vocabType: VocabType? {
+        get {
+            vocabTypeRawVal.flatMap {VocabType(rawValue: $0)}
+        }
+        
+        set {
+            vocabTypeRawVal = newValue?.rawValue
+        }
+    }
     
     var nextReviewAt: Date?
     var intervalDays: Int?

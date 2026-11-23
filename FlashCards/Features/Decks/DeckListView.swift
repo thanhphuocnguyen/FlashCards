@@ -223,6 +223,7 @@ struct DeckListView: View {
         card.backupID = snapshot.backupID ?? card.backupID
         card.nextReviewAt = snapshot.nextReviewAt
         card.intervalDays = snapshot.intervalDays
+        card.vocabTypeRawVal = snapshot.vocabTypeRawVal
         return card
     }
 }

@@ -5,8 +5,8 @@
 //  Created by Thành Phước Nguyễn on 19/11/26.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct DeckDetailView: View {
     @Environment(\.modelContext) private var modelContext
@@ -17,24 +17,24 @@ struct DeckDetailView: View {
     @State private var draftDeckName = ""
     @State private var cardToDelete: Flashcard?
     @State private var isConfirmingDelete = false
-    
+
     let deck: Deck
-    
+
     private var visibleCards: [Flashcard] {
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !query.isEmpty else { return deck.cards }
-        
+
         return deck.cards.filter { card in
             card.front.localizedCaseInsensitiveContains(query)
-            || card.back.localizedCaseInsensitiveContains(query)
+                || card.back.localizedCaseInsensitiveContains(query)
         }
     }
-    
+
     var body: some View {
         List {
             Section("Study") {
                 TimelineView(.periodic(from: .now, by: 15)) { context in
-                    let dueCount = deck.cards.filter { $0.isDue(at: context.date ) }.count
+                    let dueCount = deck.cards.filter { $0.isDue(at: context.date) }.count
 
                     NavigationLink {
                         StudyView(cards: deck.cards)
@@ -42,27 +42,26 @@ struct DeckDetailView: View {
                             .navigationBarTitleDisplayMode(.inline)
                     } label: {
                         studyActions(
-                            title: "Reviewe due cards",
+                            title: "Review due cards",
                             subtitle: dueCount == 1 ? "1 card ready" : "\(dueCount) cards ready",
                             icon: "clock"
                         )
                     }
                     .disabled(deck.cards.isEmpty)
-                    
-                    NavigationLink {
-                        PracticeSetupView(cards: deck.cards)
-                    } label: {
-                        studyActions(
-                            title: "Practice All Cards",
-                            subtitle: "Review schedules stay the same",
-                            icon: "rectangle.stack"
-                        )
-                    }
-                    .disabled(deck.cards.isEmpty)
                 }
+
+                NavigationLink {
+                    PracticeSetupView(cards: deck.cards)
+                } label: {
+                    studyActions(
+                        title: "Practice All Cards",
+                        subtitle: "Review schedules stay the same",
+                        icon: "rectangle.stack"
+                    )
+                }
+                .disabled(deck.cards.isEmpty)
             }
-            
-            
+
             Section("Cards") {
                 if deck.cards.isEmpty {
                     Text("This deck has no cards yet.")
@@ -79,11 +78,20 @@ struct DeckDetailView: View {
                                 Text(card.front)
                                     .font(.headline)
                                     .foregroundStyle(.primary)
-                                
-                                Text(card.back.split(whereSeparator: \.isNewline).joined(separator: " . "))
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
-                                    .lineLimit(1)
+
+                                if let type = card.vocabType {
+                                    Text(type.rawValue.capitalized)
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+
+                                Text(
+                                    card.back.split(whereSeparator: \.isNewline).joined(
+                                        separator: " . ")
+                                )
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                                .lineLimit(1)
                             }
                         }
                         .swipeActions(allowsFullSwipe: false) {
@@ -95,7 +103,6 @@ struct DeckDetailView: View {
                             }
                         }
                     }
-                    
                 }
             }
         }
@@ -106,7 +113,7 @@ struct DeckDetailView: View {
                 guard let index = deck.cards.firstIndex(where: { $0.id == card.id }) else {
                     return
                 }
-                
+
                 deck.cards[index].front = draft.front
                 deck.cards[index].back = draft.back
             }
@@ -117,7 +124,7 @@ struct DeckDetailView: View {
                     isAddCardOpen = true
                 }
             }
-            
+
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Rename Deck", systemImage: "pencil") {
                     draftDeckName = deck.name
@@ -126,9 +133,15 @@ struct DeckDetailView: View {
             }
         }
         .sheet(isPresented: $isAddCardOpen) {
-            AddCardView(deckName: deck.name) { newCard in
-                deck.cards.append(newCard)
-            }
+            AddCardView(
+                deckName: deck.name,
+                onSave: { card in
+                    deck.cards.append(card)
+                },
+                onSaveAll: { cards in
+                    deck.cards.append(contentsOf: cards)
+                }
+            )
         }
         .alert("Rename Deck", isPresented: $isRenamingDeck) {
             TextField("Deck Name", text: $draftDeckName)
@@ -149,7 +162,7 @@ struct DeckDetailView: View {
             Button("Cancel", role: .cancel) {
                 cardToDelete = nil
             }
-            
+
             Button("Delete Card", role: .destructive) {
                 modelContext.delete(card)
                 cardToDelete = nil
@@ -158,7 +171,7 @@ struct DeckDetailView: View {
             Text(card.front)
         }
     }
-    
+
     private func studyActions(
         title: String,
         subtitle: String,
@@ -174,16 +187,16 @@ struct DeckDetailView: View {
                     in: RoundedRectangle(cornerRadius: 10)
                 )
                 .accessibilityHidden(true)
-            
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.headline)
-                
+
                 Text(subtitle)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
-                
+
         }
         .padding(.vertical, 4)
     }
@@ -194,7 +207,7 @@ private struct DeckDetailPreview: View {
         name: "Chinese Basics",
         cards: [Flashcard(front: "学", back: "xué\nto learn, to study")]
     )
-    
+
     var body: some View {
         NavigationStack {
             DeckDetailView(deck: deck)
@@ -208,13 +221,15 @@ private struct DeckDetailPreview: View {
         for: Deck.self, Flashcard.self,
         configurations: configuration
     )
-    
-    let deck = Deck(name: "Chinese Basics", cards: [
-        Flashcard(front: "学", back: "xué\nto learn"),
-        Flashcard(front: "水", back: "shuǐ\nwater")
-    ])
+
+    let deck = Deck(
+        name: "Chinese Basics",
+        cards: [
+            Flashcard(front: "学", back: "xué\nto learn"),
+            Flashcard(front: "水", back: "shuǐ\nwater"),
+        ])
     container.mainContext.insert(deck)
-    
+
     return NavigationStack {
         DeckDetailView(deck: deck)
     }
