@@ -95,7 +95,6 @@ struct StudyView: View {
                     answerVisibleControls(for: card)
                 } else {
                     Button("Show answer") {
-                        currentIndex += 1
                         isAnswerVisible = true
                     }
                     .controlSize(.large)
@@ -132,6 +131,7 @@ struct StudyView: View {
                             }
                             currentIndex = 0
                             isAnswerVisible = false
+                            wordTyped = ""
                             completeCards = 0
                             retryCount = 0
                             skippedCards = 0
@@ -177,6 +177,7 @@ struct StudyView: View {
                 } else {
                     isAnswerVisible = true
                 }
+                wordTyped = ""
             } label: {
                 Text(isAnswerVisible ? "Next Card" : typeTheWord ? "Check Answer" : "Show Answer")
             }
@@ -187,6 +188,7 @@ struct StudyView: View {
                 skippedCards += 1
                 currentIndex += 1
                 isAnswerVisible = false
+                wordTyped = ""
             }
             .opacity(isAnswerVisible ? 0 : 1)
             .disabled(isAnswerVisible)
@@ -215,6 +217,7 @@ struct StudyView: View {
             schedule(card, inDays: days, from: now)
             completeCards += 1
         }
+        currentIndex += 1
         isAnswerVisible = false
     }
     

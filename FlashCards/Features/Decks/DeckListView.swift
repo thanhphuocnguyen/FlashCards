@@ -163,12 +163,12 @@ struct DeckListView: View {
                let existingDeck = decksByBackupID[id] {
                 var knownCardIDs = Set(existingDeck.cards.compactMap(\.backupID))
                 for savedCard in snapshot.cards {
-                    guard let cardID = savedCard.backupID,
-                          knownCardIDs.insert(cardID).inserted else {
+                    let cardID = savedCard.backupID
+                    if cardID != nil && knownCardIDs.insert(cardID!).inserted {
                         continue
                     }
+
                     existingDeck.cards.append(makeCard(from: savedCard))
-                    
                     addedCardCount+=1
                 }
                 continue

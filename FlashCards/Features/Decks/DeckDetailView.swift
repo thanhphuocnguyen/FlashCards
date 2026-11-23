@@ -116,6 +116,7 @@ struct DeckDetailView: View {
 
                 deck.cards[index].front = draft.front
                 deck.cards[index].back = draft.back
+                deck.cards[index].vocabType = draft.vocabType
             }
         }
         .toolbar {
