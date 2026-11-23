@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct FlashcardView: View, Animatable {
+    @Binding var wordTyped: String
+    let typeTheWord: Bool
     let prompt: String
     let answer: String
+    
     var angle: Double
     
     var animatableData: Double {
@@ -22,11 +25,13 @@ struct FlashcardView: View, Animatable {
         ZStack {
             face("Prompt", text: prompt, font: .largeTitle)
                 .opacity(showAnswer ? 0 : 1)
+                .allowsHitTesting(!showAnswer)
                 .accessibilityHidden(showAnswer)
             
             face("Answer", text: answer, font: .title2)
                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                 .opacity(showAnswer ? 1 : 0)
+                .allowsHitTesting(showAnswer)
                 .accessibilityHidden(!showAnswer)
         }
         .rotation3DEffect(.degrees(angle), axis: (x: 0, y: 1, z: 0), perspective: 0.5)
@@ -40,13 +45,39 @@ struct FlashcardView: View, Animatable {
         let isAnswer = title == "Answer"
 
         return  VStack(spacing: 12) {
-            Text(title)
-                .font(.caption)
+            Text(isAnswer ? title : (typeTheWord ? "Type the word" : "Prompt"))
+                .font(.subheadline.weight(.medium))
                 .foregroundStyle(.secondary)
             
-            Text(text)
+            Text(isAnswer ? answer : prompt)
                 .font(font)
                 .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            if typeTheWord {
+                if !isAnswer {
+                    TextField("Input your answer", text: $wordTyped)
+                        .font(.title3)
+                        .multilineTextAlignment(.center)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .accessibilityLabel("Your answer")
+                        .padding(12)
+                        .frame(maxWidth: 300)
+                        .background(
+                            Color(uiColor: .systemBackground),
+                            in: RoundedRectangle(cornerRadius: 12)
+                        )
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 12)
+                                .strokeBorder(.secondary.opacity(0.25))
+                        }
+                } else  {
+                    answerFeedback
+                }
+
+            }
+
         }
         .padding(24)
         .frame(maxWidth: .infinity, minHeight: 220)
@@ -66,12 +97,29 @@ struct FlashcardView: View, Animatable {
                 )
         }
     }
+    
+    private var answerFeedback: some View {
+        let entered = wordTyped.trimmingCharacters(in: .whitespacesAndNewlines)
+        let expected = answer.trimmingCharacters(in: .whitespacesAndNewlines)
+        let matches = entered.compare(expected, options: .caseInsensitive) == .orderedSame
+
+        return Label(
+            entered.isEmpty ? "No answer entered" : (matches ? "Correct" : "Incorrect"),
+            systemImage: entered.isEmpty ? "minus.circle" :
+                (matches ? "checkmark.circle.fill" : "xmark.circle")
+        )
+        .font(.subheadline.weight(.medium))
+        .foregroundStyle(matches && !entered.isEmpty ? Color.green : Color.secondary)
+    }
 }
 
 #Preview {
     @Previewable @State var isFlipped = false
+    @Previewable @State var wordTyped = ""
     VStack(spacing: 20) {
         FlashcardView(
+            wordTyped: $wordTyped,
+            typeTheWord: true,
             prompt: "水",
             answer: "shuǐ\nwater",
             angle: isFlipped ? 180 : 0

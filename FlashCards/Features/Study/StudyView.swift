@@ -22,6 +22,8 @@ struct StudyView: View {
     @State private var completeCards = 0
     @State private var retryCount = 0
     @State private var skippedCards = 0
+    @State private var wordTyped = ""
+    @State private var isTypedAnswerCorrected: Bool?
     
     enum Direction {
         case frontFirst
@@ -30,6 +32,7 @@ struct StudyView: View {
     
     let direction: Direction
     let shuffle: Bool
+    let typeTheWord: Bool
     enum Mode {
         case review
         case practice
@@ -41,11 +44,13 @@ struct StudyView: View {
         cards: [Flashcard],
         mode: Mode = .review,
         direction: Direction = .frontFirst,
-        shuffle: Bool = false
+        shuffle: Bool = false,
+        typeTheWord: Bool = false
     ) {
         self.mode = mode
         self.direction = direction
         self.shuffle = shuffle
+        self.typeTheWord = typeTheWord
         let now = Date.now
         var sessionCards: [Flashcard]
         
@@ -77,6 +82,7 @@ struct StudyView: View {
                 )
                     .padding(EdgeInsets(top: 0, leading: 40.0, bottom: 0, trailing: 40.0))
                     .scaleEffect(x:1, y: 2, anchor: .center)
+
                 Text("Remaining: \(remainingAttempts)")
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -86,29 +92,10 @@ struct StudyView: View {
                 if mode == .practice {
                     practiceControls
                 } else if isAnswerVisible {
-                    let layout = dynamicTypeSize.isAccessibilitySize
-                    ? AnyLayout(VStackLayout(spacing: 12))
-                    : AnyLayout(HStackLayout(spacing: 12))
-                    
-                    layout {
-                        VStack {
-                            Button("Again") { rate(.again, card: card) }
-                            Text("Now")
-                        }
-                        
-                        VStack {
-                            Button("Hard") { rate(.hard, card: card) }
-                            Text("1 day")
-                        }
-                        
-                        VStack {
-                            Button("Good") { rate(.good, card: card) }
-                            Text("\(goodInterval(for: card.intervalDays)) days")
-                        }
-                    }
-                    .buttonStyle(.bordered)
+                    answerVisibleControls(for: card)
                 } else {
                     Button("Show answer") {
+                        currentIndex += 1
                         isAnswerVisible = true
                     }
                     .controlSize(.large)
@@ -158,6 +145,30 @@ struct StudyView: View {
         .padding()
     }
     
+    private func answerVisibleControls(for card: Flashcard) -> some View {
+        let layout = dynamicTypeSize.isAccessibilitySize
+        ? AnyLayout(VStackLayout(spacing: 12))
+        : AnyLayout(HStackLayout(spacing: 12))
+        
+        return layout {
+            VStack {
+                Button("Again") { rate(.again, card: card) }
+                Text("Now")
+            }
+            
+            VStack {
+                Button("Hard") { rate(.hard, card: card) }
+                Text("1 day")
+            }
+            
+            VStack {
+                Button("Good") { rate(.good, card: card) }
+                Text("\(goodInterval(for: card.intervalDays)) days")
+            }
+        }
+        .buttonStyle(.bordered)
+    }
+    
     private var practiceControls: some View {
         VStack(spacing: 12) {
             Button {
@@ -167,7 +178,7 @@ struct StudyView: View {
                     isAnswerVisible = true
                 }
             } label: {
-                Text(isAnswerVisible ? "Next Card" : "Show Answer")
+                Text(isAnswerVisible ? "Next Card" : typeTheWord ? "Check Answer" : "Show Answer")
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
@@ -204,7 +215,6 @@ struct StudyView: View {
             schedule(card, inDays: days, from: now)
             completeCards += 1
         }
-        currentIndex += 1
         isAnswerVisible = false
     }
     
@@ -219,16 +229,18 @@ struct StudyView: View {
     }
     
     private func advance() {
-        currentIndex += 1
         isAnswerVisible = false
         completeCards += 1
+        currentIndex += 1
     }
     
     private func studyCard(for card: Flashcard) -> some View {
         ZStack {
             FlashcardView(
-                prompt: direction == .frontFirst ? card.front : card.back,
-                answer: direction == .frontFirst ? card.back : card.front,
+                wordTyped: $wordTyped,
+                typeTheWord: typeTheWord,
+                prompt: direction == .frontFirst && !typeTheWord ? card.front : card.back,
+                answer: direction == .frontFirst && !typeTheWord ? card.back : card.front,
                 angle: isAnswerVisible ? 180 : 0
             )
             .animation(
@@ -242,12 +254,23 @@ struct StudyView: View {
                     removal: .move(edge: .leading)
                 )
             )
+            
         }
         .clipped()
         .animation(
             reduceMotion ? nil : .easeInOut(duration: 0.25),
             value: currentIndex
         )
+    }
+    
+    private func checkTypedAnswer(for card: Flashcard) {
+        let entered = typeTheWord.description.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !entered.isEmpty else {
+            return
+        }
+        
+        let expected = card.front.trimmingCharacters(in: .whitespacesAndNewlines)
+        isTypedAnswerCorrected = entered.compare(expected, options: .caseInsensitive) == .orderedSame
     }
 }
 
@@ -282,9 +305,21 @@ struct StudyView: View {
     )
 }
 
+#Preview("Type The word practice") {
+    StudyView(
+        cards: [Flashcard(front: "水", back: "shuǐ\nwater")],
+        mode: .practice,
+        direction: .backFirst,
+        typeTheWord: true
+    )
+}
+
+
 #Preview("Review with large text") {
     StudyView(cards: [
         Flashcard(front: "学", back: "xué\nto learn, to study")
     ])
     .environment(\.dynamicTypeSize, .accessibility3)
 }
+
+
