@@ -32,8 +32,14 @@ struct FlashcardView: View, Animatable {
         .rotation3DEffect(.degrees(angle), axis: (x: 0, y: 1, z: 0), perspective: 0.5)
     }
     
-    private func face(_ title: String, text: String, font: Font) -> some View {
-        VStack(spacing: 12) {
+    private func face(
+        _ title: String,
+        text: String,
+        font: Font
+    ) -> some View {
+        let isAnswer = title == "Answer"
+
+        return  VStack(spacing: 12) {
             Text(title)
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -44,10 +50,20 @@ struct FlashcardView: View, Animatable {
         }
         .padding(24)
         .frame(maxWidth: .infinity, minHeight: 220)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 24))
+        .background {
+            RoundedRectangle(cornerRadius: 24.0)
+                .fill(Color(uiColor: .secondarySystemGroupedBackground))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 24.0)
+                        .fill(Color.accentColor.opacity(isAnswer ? 0.10 : 0))
+                }
+        }
         .overlay {
             RoundedRectangle(cornerRadius: 24)
-                .strokeBorder(.quaternary)
+                .strokeBorder(
+                    isAnswer ? Color.accentColor.opacity(0.25) : Color.secondary.opacity(0.18),
+                    lineWidth: 1.0
+                )
         }
     }
 }

@@ -11,6 +11,11 @@ struct StudyView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    @AppStorage("review.hardDays") private var hardDays = 1
+    @AppStorage("review.goodMinDays") private var goodMinDays = 3
+    @AppStorage("review.goodMaxDays") private var goodMaxDays = 90
+
     @State private var queue: [Flashcard]
     @State private var currentIndex = 0
     @State private var isAnswerVisible = false
@@ -63,55 +68,52 @@ struct StudyView: View {
     }
     
     var body: some View {
-        VStack(spacing:24) {
+        VStack(spacing: 30) {
             if currentIndex < queue.count {
                 let card = queue[currentIndex]
                 
-                ProgressView(value: Double(currentIndex), total: Double(queue.count))
-                    .padding(EdgeInsets(top: 0, leading: 60.0, bottom: 0, trailing: 60.0))
+                ProgressView(value: Double(currentIndex),
+                             total: Double(queue.count),
+                )
+                    .padding(EdgeInsets(top: 0, leading: 40.0, bottom: 0, trailing: 40.0))
+                    .scaleEffect(x:1, y: 2, anchor: .center)
                 Text("Remaining: \(remainingAttempts)")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 
                 studyCard(for: card)
                 
-                if isAnswerVisible {
-                    if mode == .practice {
-                        practiceControls
-                    } else if isAnswerVisible {
-                        let layout = dynamicTypeSize.isAccessibilitySize
-                        ? AnyLayout(VStackLayout(spacing: 12))
-                        : AnyLayout(HStackLayout(spacing: 12))
+                if mode == .practice {
+                    practiceControls
+                } else if isAnswerVisible {
+                    let layout = dynamicTypeSize.isAccessibilitySize
+                    ? AnyLayout(VStackLayout(spacing: 12))
+                    : AnyLayout(HStackLayout(spacing: 12))
+                    
+                    layout {
+                        VStack {
+                            Button("Again") { rate(.again, card: card) }
+                            Text("Now")
+                        }
                         
-                        layout {
-                            VStack {
-                                Button("Again") { rate(.again, card: card) }
-                                Text("Now")
-                            }
-                            
-                            VStack {
-                                Button("Hard") { rate(.hard, card: card) }
-                                Text("1 day")
-                            }
-                            
-                            VStack {
-                                Button("Good") { rate(.good, card: card) }
-                                Text("\(goodInterval(for: card.intervalDays)) days")
-                            }
+                        VStack {
+                            Button("Hard") { rate(.hard, card: card) }
+                            Text("1 day")
                         }
-                        .buttonStyle(.bordered)
-                    } else {
-                        Button("Show answer") {
-                            isAnswerVisible = true
+                        
+                        VStack {
+                            Button("Good") { rate(.good, card: card) }
+                            Text("\(goodInterval(for: card.intervalDays)) days")
                         }
-                        .buttonStyle(.borderedProminent)
                     }
+                    .buttonStyle(.bordered)
                 } else {
                     Button("Show answer") {
-                            isAnswerVisible = true
-                        }
-                        .buttonStyle(.borderedProminent)
-                }                
+                        isAnswerVisible = true
+                    }
+                    .controlSize(.large)
+                    .buttonStyle(.borderedProminent)
+                }
             } else {
                 if queue.isEmpty {
                     Text(mode == .review ? "No cards due" : "No cards to practice")
@@ -166,7 +168,6 @@ struct StudyView: View {
                 }
             } label: {
                 Text(isAnswerVisible ? "Next Card" : "Show Answer")
-                    .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
@@ -196,7 +197,7 @@ struct StudyView: View {
             retryCount += 1
             queue.append(card)
         case .hard:
-            schedule(card, inDays: 1, from: now)
+            schedule(card, inDays: hardDays, from: now)
             completeCards += 1
         case .good:
             let days = goodInterval(for: card.intervalDays)
@@ -208,8 +209,8 @@ struct StudyView: View {
     }
     
     private func goodInterval(for interval: Int?) -> Int {
-        let previous = min(45, max(0, interval ?? 0))
-        return max(3, previous * 2)
+        let previous = min(goodMaxDays, max(0, interval ?? 0))
+        return min(goodMaxDays, max(goodMinDays, previous * 2))
     }
     
     private func schedule(_ card: Flashcard, inDays days: Int, from date: Date) {

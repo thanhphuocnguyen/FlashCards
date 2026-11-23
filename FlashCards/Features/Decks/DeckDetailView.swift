@@ -32,19 +32,37 @@ struct DeckDetailView: View {
     
     var body: some View {
         List {
-            NavigationLink("Review Due Cards") {
-                StudyView(cards: deck.cards)
-                    .navigationTitle(deck.name)
-                    .navigationBarTitleDisplayMode(.inline)
-            }
-            .disabled(deck.cards.isEmpty)
+            Section("Study") {
+                TimelineView(.periodic(from: .now, by: 15)) { context in
+                    let dueCount = deck.cards.filter { $0.isDue(at: context.date ) }.count
 
-            NavigationLink("Practice All Cards") {
-                PracticeSetupView(cards: deck.cards)
+                    NavigationLink {
+                        StudyView(cards: deck.cards)
+                            .navigationTitle(deck.name)
+                            .navigationBarTitleDisplayMode(.inline)
+                    } label: {
+                        studyActions(
+                            title: "Reviewe due cards",
+                            subtitle: dueCount == 1 ? "1 card ready" : "\(dueCount) cards ready",
+                            icon: "clock"
+                        )
+                    }
+                    .disabled(deck.cards.isEmpty)
+                    
+                    NavigationLink {
+                        PracticeSetupView(cards: deck.cards)
+                    } label: {
+                        studyActions(
+                            title: "Practice All Cards",
+                            subtitle: "Review schedules stay the same",
+                            icon: "rectangle.stack"
+                        )
+                    }
+                    .disabled(deck.cards.isEmpty)
+                }
             }
-            .disabled(deck.cards.isEmpty)
-
-                        
+            
+            
             Section("Cards") {
                 if deck.cards.isEmpty {
                     Text("This deck has no cards yet.")
@@ -140,6 +158,35 @@ struct DeckDetailView: View {
             Text(card.front)
         }
     }
+    
+    private func studyActions(
+        title: String,
+        subtitle: String,
+        icon: String
+    ) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.body.weight(.semibold))
+                .foregroundStyle(Color.accentColor)
+                .frame(width: 36, height: 36)
+                .background(
+                    Color.accentColor.opacity(0.12),
+                    in: RoundedRectangle(cornerRadius: 10)
+                )
+                .accessibilityHidden(true)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.headline)
+                
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+                
+        }
+        .padding(.vertical, 4)
+    }
 }
 
 private struct DeckDetailPreview: View {
@@ -161,13 +208,13 @@ private struct DeckDetailPreview: View {
         for: Deck.self, Flashcard.self,
         configurations: configuration
     )
-
+    
     let deck = Deck(name: "Chinese Basics", cards: [
         Flashcard(front: "学", back: "xué\nto learn"),
         Flashcard(front: "水", back: "shuǐ\nwater")
     ])
     container.mainContext.insert(deck)
-
+    
     return NavigationStack {
         DeckDetailView(deck: deck)
     }
