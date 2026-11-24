@@ -22,7 +22,6 @@ struct StudyView: View {
     @State private var completeCards = 0
     @State private var retryCount = 0
     @State private var skippedCards = 0
-    @State private var wordTyped = ""
     @State private var isTypedAnswerCorrected: Bool?
     
     enum Direction {
@@ -131,7 +130,6 @@ struct StudyView: View {
                             }
                             currentIndex = 0
                             isAnswerVisible = false
-                            wordTyped = ""
                             completeCards = 0
                             retryCount = 0
                             skippedCards = 0
@@ -177,7 +175,6 @@ struct StudyView: View {
                 } else {
                     isAnswerVisible = true
                 }
-                wordTyped = ""
             } label: {
                 Text(isAnswerVisible ? "Next Card" : typeTheWord ? "Check Answer" : "Show Answer")
             }
@@ -188,7 +185,6 @@ struct StudyView: View {
                 skippedCards += 1
                 currentIndex += 1
                 isAnswerVisible = false
-                wordTyped = ""
             }
             .opacity(isAnswerVisible ? 0 : 1)
             .disabled(isAnswerVisible)
@@ -241,7 +237,6 @@ struct StudyView: View {
     private func studyCard(for card: Flashcard) -> some View {
         ZStack {
             FlashcardView(
-                wordTyped: $wordTyped,
                 typeTheWord: typeTheWord,
                 prompt: direction == .frontFirst && !typeTheWord ? card.front : card.back,
                 answer: direction == .frontFirst && !typeTheWord ? card.back : card.front,
@@ -311,7 +306,7 @@ struct StudyView: View {
 
 #Preview("Type The word practice") {
     StudyView(
-        cards: [Flashcard(front: "水", back: "shuǐ\nwater")],
+        cards: [Flashcard(front: "Water", back: "water")],
         mode: .practice,
         direction: .backFirst,
         typeTheWord: true

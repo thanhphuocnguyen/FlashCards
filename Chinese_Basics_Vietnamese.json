@@ -1,0 +1,1296 @@
+{
+  "version": 2,
+  "decks": [
+    {
+      "name": "Tiếng Trung cơ bản",
+      "primaryLanguageCode": "zh-Hans",
+      "createdAt": 817146000,
+      "cards": [
+        {
+          "front": "咖啡",
+          "back": "kāfēi\ncà phê",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "米饭",
+          "back": "mǐfàn\ncơm",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "茶",
+          "back": "chá\ntrà",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "水",
+          "back": "shuǐ\nnước",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "汤",
+          "back": "tāng\ncanh; súp",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "热",
+          "back": "rè\nnóng",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "豆腐",
+          "back": "dòufu\nđậu phụ",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "周",
+          "back": "zhōu\ntuần; vòng, chu vi",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "菜",
+          "back": "cài\nrau; món ăn",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "零食",
+          "back": "língshí\nđồ ăn vặt",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "冰",
+          "back": "bīng\nnước đá; băng",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "气",
+          "back": "qì\nkhí, hơi; cơn giận",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "奶茶",
+          "back": "nǎichá\ntrà sữa",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "牛奶",
+          "back": "niúnǎi\nsữa bò",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "我",
+          "back": "wǒ\ntôi; mình",
+          "vocabTypeRawVal": "pronoun"
+        },
+        {
+          "front": "你",
+          "back": "nǐ\nbạn; cậu",
+          "vocabTypeRawVal": "pronoun"
+        },
+        {
+          "front": "学生",
+          "back": "xuésheng\nhọc sinh; sinh viên",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "中",
+          "back": "zhōng\ngiữa; trung tâm; mức trung bình"
+        },
+        {
+          "front": "大",
+          "back": "dà\nto; lớn",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "老师",
+          "back": "lǎoshī\ngiáo viên; thầy, cô",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "律师",
+          "back": "lǜshī\nluật sư",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "这是",
+          "back": "zhè shì\nđây là",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "呢",
+          "back": "ne\ntrợ từ hỏi tiếp hoặc nhắc đến chủ đề: còn … thì sao?",
+          "vocabTypeRawVal": "particle"
+        },
+        {
+          "front": "他",
+          "back": "tā\nanh ấy; ông ấy",
+          "vocabTypeRawVal": "pronoun"
+        },
+        {
+          "front": "她",
+          "back": "tā\ncô ấy; bà ấy",
+          "vocabTypeRawVal": "pronoun"
+        },
+        {
+          "front": "中国",
+          "back": "Zhōngguó\nTrung Quốc",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "美国",
+          "back": "Měiguó\nHoa Kỳ; Mỹ",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "日本",
+          "back": "Rìběn\nNhật Bản",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "英国",
+          "back": "Yīngguó\nVương quốc Anh",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "韩国",
+          "back": "Hánguó\nHàn Quốc",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "加拿大",
+          "back": "Jiānádà\nCanada",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "课",
+          "back": "kè\ntiết học; bài học",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "音乐",
+          "back": "yīnyuè\nâm nhạc",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "数学",
+          "back": "shùxué\ntoán học",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "妈妈",
+          "back": "māma\nmẹ",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "爸爸",
+          "back": "bàba\nbố; ba",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "儿子",
+          "back": "érzi\ncon trai",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "女儿",
+          "back": "nǚ’ér\ncon gái",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "老公",
+          "back": "lǎogōng\nchồng",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "老婆",
+          "back": "lǎopo\nvợ",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "哎呀",
+          "back": "āiyā\nôi!; ôi chao!",
+          "vocabTypeRawVal": "other"
+        },
+        {
+          "front": "说",
+          "back": "shuō\nnói; kể",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "的",
+          "back": "de\ntrợ từ sở hữu hoặc bổ nghĩa, chẳng hạn 我的书 là sách của tôi",
+          "vocabTypeRawVal": "particle"
+        },
+        {
+          "front": "喜欢",
+          "back": "xǐhuan\nthích",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "对",
+          "back": "duì\nđúng; đối với; hướng về"
+        },
+        {
+          "front": "不",
+          "back": "bù\nkhông",
+          "vocabTypeRawVal": "adverb"
+        },
+        {
+          "front": "去",
+          "back": "qù\nđi",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "也",
+          "back": "yě\ncũng",
+          "vocabTypeRawVal": "adverb"
+        },
+        {
+          "front": "嗨",
+          "back": "hāi\nchào!",
+          "vocabTypeRawVal": "other"
+        },
+        {
+          "front": "吃",
+          "back": "chī\năn",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "买",
+          "back": "mǎi\nmua",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "要",
+          "back": "yào\nmuốn; cần; sắp, sẽ",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "谢谢",
+          "back": "xièxie\ncảm ơn",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "不客气",
+          "back": "bú kèqi\nkhông có gì; đừng khách sáo",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "常常",
+          "back": "chángcháng\nthường xuyên",
+          "vocabTypeRawVal": "adverb"
+        },
+        {
+          "front": "饭馆",
+          "back": "fànguǎn\nquán ăn; nhà hàng",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "超市",
+          "back": "chāoshì\nsiêu thị",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "书店",
+          "back": "shūdiàn\nhiệu sách",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "洗手间",
+          "back": "xǐshǒujiān\nnhà vệ sinh",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "火车站",
+          "back": "huǒchēzhàn\nga tàu hỏa",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "站台",
+          "back": "zhàntái\nsân ga",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "站",
+          "back": "zhàn\nđứng; trạm, ga"
+        },
+        {
+          "front": "行李",
+          "back": "xíngli\nhành lý",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "车票",
+          "back": "chēpiào\nvé xe; vé tàu",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "杯",
+          "back": "bēi\ncốc, ly; lượng từ cho đồ uống"
+        },
+        {
+          "front": "钱包",
+          "back": "qiánbāo\nví tiền",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "第二",
+          "back": "dì’èr\nthứ hai; số hai trong một thứ tự"
+        },
+        {
+          "front": "手机",
+          "back": "shǒujī\nđiện thoại di động",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "三",
+          "back": "sān\nba"
+        },
+        {
+          "front": "二",
+          "back": "èr\nhai"
+        },
+        {
+          "front": "一",
+          "back": "yī\nmột"
+        },
+        {
+          "front": "哪里",
+          "back": "nǎlǐ\nở đâu; chỗ nào",
+          "vocabTypeRawVal": "pronoun"
+        },
+        {
+          "front": "这里",
+          "back": "zhèlǐ\nở đây; chỗ này",
+          "vocabTypeRawVal": "pronoun"
+        },
+        {
+          "front": "火",
+          "back": "huǒ\nlửa",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "还是",
+          "back": "háishi\nhay là (trong câu hỏi lựa chọn); vẫn; tốt hơn là"
+        },
+        {
+          "front": "健身房",
+          "back": "jiànshēnfáng\nphòng tập thể dục; phòng gym",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "好",
+          "back": "hǎo\ntốt; được",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "吗",
+          "back": "ma\ntrợ từ hỏi có–không, tương đương “không?” hoặc “à?”",
+          "vocabTypeRawVal": "particle"
+        },
+        {
+          "front": "四",
+          "back": "sì\nbốn"
+        },
+        {
+          "front": "都",
+          "back": "dōu\nđều; tất cả",
+          "vocabTypeRawVal": "adverb"
+        },
+        {
+          "front": "一个",
+          "back": "yí ge\nmột cái; một người",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "两个",
+          "back": "liǎng ge\nhai cái; hai người",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "新",
+          "back": "xīn\nmới",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "同学",
+          "back": "tóngxué\nbạn học; bạn cùng lớp",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "王明",
+          "back": "Wáng Míng\nVương Minh (tên người)",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "李天美",
+          "back": "Lǐ Tiānměi\nLý Thiên Mỹ (tên người)",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "叫",
+          "back": "jiào\ngọi; tên là; kêu",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "三节课",
+          "back": "sān jié kè\nba tiết học",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "有",
+          "back": "yǒu\ncó",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "今天",
+          "back": "jīntiān\nhôm nay",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "历史课",
+          "back": "lìshǐ kè\ntiết lịch sử; môn lịch sử",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "真的吗",
+          "back": "zhēn de ma\nthật à?; thật sao?",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "我们",
+          "back": "wǒmen\nchúng tôi; chúng ta",
+          "vocabTypeRawVal": "pronoun"
+        },
+        {
+          "front": "公园",
+          "back": "gōngyuán\ncông viên",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "你们",
+          "back": "nǐmen\ncác bạn",
+          "vocabTypeRawVal": "pronoun"
+        },
+        {
+          "front": "游泳",
+          "back": "yóuyǒng\nbơi; bơi lội",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "是",
+          "back": "shì\nlà; đúng vậy",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "跑步",
+          "back": "pǎobù\nchạy bộ",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "打",
+          "back": "dǎ\nđánh; chơi (một số môn thể thao); gọi (điện thoại)",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "篮球",
+          "back": "lánqiú\nbóng rổ",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "排球",
+          "back": "páiqiú\nbóng chuyền",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "运动",
+          "back": "yùndòng\nthể thao; vận động"
+        },
+        {
+          "front": "网球",
+          "back": "wǎngqiú\nquần vợt",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "非常",
+          "back": "fēicháng\nrất; vô cùng",
+          "vocabTypeRawVal": "adverb"
+        },
+        {
+          "front": "比较",
+          "back": "bǐjiào\ntương đối, khá; so sánh"
+        },
+        {
+          "front": "房子",
+          "back": "fángzi\nnhà; căn nhà",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "公寓",
+          "back": "gōngyù\ncăn hộ; chung cư",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "房间",
+          "back": "fángjiān\nphòng; căn phòng",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "客厅",
+          "back": "kètīng\nphòng khách",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "小",
+          "back": "xiǎo\nnhỏ; bé",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "只有",
+          "back": "zhǐyǒu\nchỉ có; chỉ khi",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "厨房",
+          "back": "chúfáng\nnhà bếp; phòng bếp",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "卧室",
+          "back": "wòshì\nphòng ngủ",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "漂亮",
+          "back": "piàoliang\nđẹp; xinh",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "哇",
+          "back": "wa\noa!; chà!",
+          "vocabTypeRawVal": "other"
+        },
+        {
+          "front": "床",
+          "back": "chuáng\ngiường",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "电视",
+          "back": "diànshì\ntivi; truyền hình",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "沙发",
+          "back": "shāfā\nghế sofa",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "舒服",
+          "back": "shūfu\nthoải mái; dễ chịu",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "只",
+          "back": "zhǐ / zhī\nchỉ (zhǐ); lượng từ cho động vật và một số đồ vật (zhī)"
+        },
+        {
+          "front": "冰箱",
+          "back": "bīngxiāng\ntủ lạnh",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "桌子",
+          "back": "zhuōzi\ncái bàn",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "旧",
+          "back": "jiù\ncũ",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "很乱",
+          "back": "hěn luàn\nrất bừa bộn; rất lộn xộn",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "北京",
+          "back": "Běijīng\nBắc Kinh",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "老家",
+          "back": "lǎojiā\nquê nhà",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "夏天",
+          "back": "xiàtiān\nmùa hè",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "热闹",
+          "back": "rènao\nnhộn nhịp; náo nhiệt",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "好玩",
+          "back": "hǎowán\nvui; thú vị",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "冬天",
+          "back": "dōngtiān\nmùa đông",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "冷",
+          "back": "lěng\nlạnh",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "特别",
+          "back": "tèbié\nđặc biệt; rất"
+        },
+        {
+          "front": "的时候",
+          "back": "de shíhou\nkhi …; vào lúc …",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "秋天",
+          "back": "qiūtiān\nmùa thu",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "故宫",
+          "back": "Gùgōng\nCố Cung; Tử Cấm Thành",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "长城",
+          "back": "Chángchéng\nVạn Lý Trường Thành",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "有名",
+          "back": "yǒumíng\nnổi tiếng",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "人们",
+          "back": "rénmen\nmọi người; người ta",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "春天",
+          "back": "chūntiān\nmùa xuân",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "动物园",
+          "back": "dòngwùyuán\nsở thú; vườn thú",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "门票",
+          "back": "ménpiào\nvé vào cửa",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "元",
+          "back": "yuán\ntệ, đơn vị tiền Trung Quốc",
+          "vocabTypeRawVal": "classifier"
+        },
+        {
+          "front": "贵",
+          "back": "guì\nđắt; quý",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "烤鸭",
+          "back": "kǎoyā\nvịt quay",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "火锅",
+          "back": "huǒguō\nlẩu",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "辣",
+          "back": "là\ncay",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "好吃",
+          "back": "hǎochī\nngon (đồ ăn)",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "博物馆",
+          "back": "bówùguǎn\nbảo tàng",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "好的",
+          "back": "hǎo de\nđược; vâng; đồng ý",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "有空",
+          "back": "yǒu kòng\nrảnh; có thời gian",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "周末",
+          "back": "zhōumò\ncuối tuần",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "吧",
+          "back": "ba\ntrợ từ đề nghị hoặc phỏng đoán, như “nhé”, “nhỉ”",
+          "vocabTypeRawVal": "particle"
+        },
+        {
+          "front": "公交车",
+          "back": "gōngjiāochē\nxe buýt",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "地铁",
+          "back": "dìtiě\ntàu điện ngầm",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "坐",
+          "back": "zuò\nngồi; đi bằng (phương tiện)",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "快",
+          "back": "kuài\nnhanh; sắp"
+        },
+        {
+          "front": "电影",
+          "back": "diànyǐng\nphim; điện ảnh",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "爱情",
+          "back": "àiqíng\ntình yêu",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "爆米花",
+          "back": "bàomǐhuā\nbắp rang; bỏng ngô",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "一些",
+          "back": "yìxiē\nmột ít; một số"
+        },
+        {
+          "front": "水果",
+          "back": "shuǐguǒ\ntrái cây; hoa quả",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "蛋糕",
+          "back": "dàngāo\nbánh ngọt; bánh kem",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "带",
+          "back": "dài\nmang theo; dẫn theo",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "我家",
+          "back": "wǒ jiā\nnhà tôi; gia đình tôi",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "果汁",
+          "back": "guǒzhī\nnước ép trái cây",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "晚饭",
+          "back": "wǎnfàn\nbữa tối; cơm tối",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "饺子",
+          "back": "jiǎozi\nsủi cảo",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "喝",
+          "back": "hē\nuống",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "做",
+          "back": "zuò\nlàm; chế biến",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "爷爷",
+          "back": "yéye\nông nội",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "手",
+          "back": "shǒu\ntay; bàn tay",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "肉",
+          "back": "ròu\nthịt",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "蔬菜",
+          "back": "shūcài\nrau củ",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "多",
+          "back": "duō\nnhiều; hơn"
+        },
+        {
+          "front": "西红柿",
+          "back": "xīhóngshì\ncà chua",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "土豆",
+          "back": "tǔdòu\nkhoai tây",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "先",
+          "back": "xiān\ntrước; trước tiên",
+          "vocabTypeRawVal": "adverb"
+        },
+        {
+          "front": "做饭",
+          "back": "zuòfàn\nnấu cơm; nấu ăn",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "盐",
+          "back": "yán\nmuối",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "盘子",
+          "back": "pánzi\nđĩa",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "小心",
+          "back": "xiǎoxīn\ncẩn thận; coi chừng"
+        },
+        {
+          "front": "放",
+          "back": "fàng\nđặt; để; cho vào",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "糖",
+          "back": "táng\nđường; kẹo",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "洗",
+          "back": "xǐ\nrửa; giặt",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "杯子",
+          "back": "bēizi\ncái cốc; cái ly",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "玩",
+          "back": "wán\nchơi",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "用",
+          "back": "yòng\ndùng; sử dụng",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "别",
+          "back": "bié\nđừng; chớ",
+          "vocabTypeRawVal": "adverb"
+        },
+        {
+          "front": "碗",
+          "back": "wǎn\nbát; chén",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "冰淇淋",
+          "back": "bīngqílín\nkem",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "洗碗机",
+          "back": "xǐwǎnjī\nmáy rửa bát",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "现在",
+          "back": "xiànzài\nbây giờ; hiện tại",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "擦",
+          "back": "cā\nlau; chùi",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "十",
+          "back": "shí\nmười"
+        },
+        {
+          "front": "俱乐部",
+          "back": "jùlèbù\ncâu lạc bộ",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "喜剧",
+          "back": "xǐjù\nhài kịch; phim hài",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "足球",
+          "back": "zúqiú\nbóng đá",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "踢",
+          "back": "tī\nđá (bằng chân)",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "棒球",
+          "back": "bàngqiú\nbóng chày",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "一起",
+          "back": "yìqǐ\ncùng nhau",
+          "vocabTypeRawVal": "adverb"
+        },
+        {
+          "front": "会",
+          "back": "huì\nbiết làm; sẽ; cuộc họp"
+        },
+        {
+          "front": "钢琴",
+          "back": "gāngqín\nđàn piano",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "弹",
+          "back": "tán / dàn\nchơi đàn, bật nảy (tán); viên đạn (dàn)"
+        },
+        {
+          "front": "吉他",
+          "back": "jítā\nđàn guitar",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "流行音乐",
+          "back": "liúxíng yīnyuè\nnhạc pop; nhạc thịnh hành",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "唱歌",
+          "back": "chànggē\nhát",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "西班牙语",
+          "back": "Xībānyáyǔ\ntiếng Tây Ban Nha",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "发育",
+          "back": "fāyù\nphát triển (về thể chất); sinh trưởng",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "联系",
+          "back": "liánxì\nliên hệ; mối liên hệ"
+        },
+        {
+          "front": "语言",
+          "back": "yǔyán\nngôn ngữ",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "种",
+          "back": "zhǒng / zhòng\nloại, giống (zhǒng); trồng, gieo (zhòng)"
+        },
+        {
+          "front": "面条",
+          "back": "miàntiáo\nmì sợi",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "饼干",
+          "back": "bǐnggān\nbánh quy",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "面包",
+          "back": "miànbāo\nbánh mì",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "泰国",
+          "back": "Tàiguó\nThái Lan",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "烤",
+          "back": "kǎo\nnướng; quay",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "不行",
+          "back": "bù xíng\nkhông được; không ổn",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "健康",
+          "back": "jiànkāng\nkhỏe mạnh; sức khỏe"
+        },
+        {
+          "front": "想",
+          "back": "xiǎng\nmuốn; nghĩ; nhớ",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "玩具",
+          "back": "wánjù\nđồ chơi",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "狗",
+          "back": "gǒu\nchó",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "兔子",
+          "back": "tùzi\nthỏ",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "养",
+          "back": "yǎng\nnuôi; nuôi dưỡng",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "可爱",
+          "back": "kě’ài\nđáng yêu; dễ thương",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "姐姐",
+          "back": "jiějie\nchị gái",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "商场",
+          "back": "shāngchǎng\ntrung tâm mua sắm",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "出去玩",
+          "back": "chūqu wán\nra ngoài chơi; đi chơi",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "朋友",
+          "back": "péngyou\nbạn bè; bạn",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "可以",
+          "back": "kěyǐ\ncó thể; được phép",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "巧克力",
+          "back": "qiǎokèlì\nsô-cô-la",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "电脑",
+          "back": "diànnǎo\nmáy tính",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "哥哥",
+          "back": "gēge\nanh trai",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "可乐",
+          "back": "kělè\nnước cola",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "游戏",
+          "back": "yóuxì\ntrò chơi",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "届",
+          "back": "jiè\nlượng từ cho kỳ, khóa hoặc nhiệm kỳ",
+          "vocabTypeRawVal": "classifier"
+        },
+        {
+          "front": "窗户",
+          "back": "chuānghu\ncửa sổ",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "休息",
+          "back": "xiūxi\nnghỉ ngơi",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "累",
+          "back": "lèi\nmệt",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "扫",
+          "back": "sǎo\nquét",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "邻居",
+          "back": "línjū\nhàng xóm",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "室友",
+          "back": "shìyǒu\nbạn cùng phòng",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "找",
+          "back": "zhǎo\ntìm; tìm kiếm",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "吵",
+          "back": "chǎo\nồn ào; cãi nhau"
+        },
+        {
+          "front": "地方",
+          "back": "dìfang\nnơi; chỗ",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "椅子",
+          "back": "yǐzi\nghế",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "台灯",
+          "back": "táidēng\nđèn bàn",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "重",
+          "back": "zhòng / chóng\nnặng, quan trọng (zhòng); lại, lặp lại (chóng)"
+        },
+        {
+          "front": "这个",
+          "back": "zhè ge\ncái này; người này",
+          "vocabTypeRawVal": "pronoun"
+        },
+        {
+          "front": "那个",
+          "back": "nà ge\ncái kia; người kia",
+          "vocabTypeRawVal": "pronoun"
+        },
+        {
+          "front": "衣服",
+          "back": "yīfu\nquần áo",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "帽子",
+          "back": "màozi\nmũ; nón",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "还要",
+          "back": "hái yào\ncòn muốn; còn cần; còn phải",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "这下",
+          "back": "zhè xià\nlúc này; phen này",
+          "vocabTypeRawVal": "phrase"
+        },
+        {
+          "front": "勺子",
+          "back": "sháozi\nthìa; muỗng",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "扔掉",
+          "back": "rēngdiào\nvứt đi; bỏ đi",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "那些",
+          "back": "nàxiē\nnhững cái kia; những người kia",
+          "vocabTypeRawVal": "pronoun"
+        },
+        {
+          "front": "拖把",
+          "back": "tuōbǎ\ncây lau nhà",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "吸尘器",
+          "back": "xīchénqì\nmáy hút bụi",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "打扫",
+          "back": "dǎsǎo\nquét dọn; dọn dẹp",
+          "vocabTypeRawVal": "verb"
+        },
+        {
+          "front": "脏",
+          "back": "zāng\nbẩn",
+          "vocabTypeRawVal": "adjective"
+        },
+        {
+          "front": "东西",
+          "back": "dōngxi\nđồ vật; đồ đạc",
+          "vocabTypeRawVal": "noun"
+        },
+        {
+          "front": "书架",
+          "back": "shūjià\ngiá sách; kệ sách",
+          "vocabTypeRawVal": "noun"
+        }
+      ]
+    }
+  ]
+}

@@ -8,7 +8,7 @@
 import Foundation
 import UserNotifications
 
-enum StudyReminders{
+enum StudyReminders {
     private static let times = [
         ( id: "study.morning", hour: 8, minute: 0 ),
         ( id: "study.lunch", hour: 12, minute: 30 ),

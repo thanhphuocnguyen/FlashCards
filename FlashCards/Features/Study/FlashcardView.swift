@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FlashcardView: View, Animatable {
-    @Binding var wordTyped: String
+    @State private var wordTyped = ""
     let typeTheWord: Bool
     let prompt: String
     let answer: String
@@ -118,7 +118,6 @@ struct FlashcardView: View, Animatable {
     @Previewable @State var wordTyped = ""
     VStack(spacing: 20) {
         FlashcardView(
-            wordTyped: $wordTyped,
             typeTheWord: true,
             prompt: "水",
             answer: "shuǐ\nwater",
