@@ -17,16 +17,31 @@ struct DeckListView: View {
     
     @State private var isShowingNewDeck = false
     @State private var newDeckName = ""
+
     @State private var backupDocument: BackupDocument?
     @State private var isExportingBackup = false
     @State private var isShowingExportError = false
+
     @State private var isImportingBackup = false
     @State private var isShowingImportError = false
     @State private var isShowingImportSuccess = false
     @State private var importedDecks = 0
     @State private var importedCards = 0
+
     @State private var deckToDelete: Deck?
     @State private var isConfirmingDeckDelete = false
+    
+    private struct CardContentKey: Hashable {
+        let front: String
+        let back: String
+        let vocabTypeRawVal: String?
+        
+        init(front: String, back: String, vocabTypeRawVal: String?) {
+            self.front = front.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.back = back.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.vocabTypeRawVal = vocabTypeRawVal
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -159,22 +174,53 @@ struct DeckListView: View {
         var addedDeckCount = 0
         var addedCardCount = 0
         for snapshot in backup.decks {
+            // if deck existed in user's list
             if let id = snapshot.backupID,
                let existingDeck = decksByBackupID[id] {
                 var knownCardIDs = Set(existingDeck.cards.compactMap(\.backupID))
+                var knownContent = Set(existingDeck.cards.map { card in
+                    CardContentKey(
+                        front: card.front,
+                        back: card.back,
+                        vocabTypeRawVal: card.vocabTypeRawVal
+                    )
+                })
+                
+                // handle for cards had ids
                 for savedCard in snapshot.cards {
-                    let cardID = savedCard.backupID
-                    if cardID != nil && knownCardIDs.insert(cardID!).inserted {
-                        continue
-                    }
-
+                    guard let cardID = savedCard.backupID,
+                          knownCardIDs.insert(cardID).inserted else { continue }
+                    
                     existingDeck.cards.append(makeCard(from: savedCard))
+                    knownContent.insert(CardContentKey(
+                        front: savedCard.front,
+                        back: savedCard.back,
+                        vocabTypeRawVal: savedCard.vocabTypeRawVal
+                    ))
+
                     addedCardCount+=1
                 }
+                
+                // handle for cards didn't contain id
+                for savedCard in snapshot.cards where savedCard.backupID == nil {
+                    let key = CardContentKey(
+                        front: savedCard.front,
+                        back: savedCard.back,
+                        vocabTypeRawVal: savedCard.vocabTypeRawVal
+                    )
+                    
+                    guard knownContent.insert(key).inserted else { continue }
+                    
+                    existingDeck.cards.append(makeCard(from: savedCard))
+                    addedCardCount += 1
+                }
+
                 continue
             }
+
+            // handle for new deck
             var seenCardIDs = Set<UUID>()
-            
+            // filter cards that weren't added
             let cards = snapshot.cards.compactMap { savedCard -> Flashcard? in
                 if let id = savedCard.backupID,
                    !seenCardIDs.insert(id).inserted {
@@ -182,17 +228,21 @@ struct DeckListView: View {
                 }
                 return  makeCard(from: savedCard)
             }
-
-            addedCardCount+=cards.count
             
+            // create new deck
             let deck = Deck(name: snapshot.name, cards: cards)
             deck.createdAt = snapshot.createdAt
-            addedDeckCount+=1
             deck.backupID = snapshot.backupID ?? deck.backupID
+            deck.primaryLanguageCode = snapshot.primaryLanguageCode
             decksByBackupID[deck.backupID!] = deck
+
+            addedDeckCount+=1
+            addedCardCount += cards.count
+            
             modelContext.insert(deck)
         }
         
+        // make a transaction
         do {
             try modelContext.save()
             isShowingImportSuccess = true

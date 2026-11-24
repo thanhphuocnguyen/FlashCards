@@ -32,36 +32,10 @@ struct DeckDetailView: View {
 
     var body: some View {
         List {
-            Section("Study") {
-                TimelineView(.periodic(from: .now, by: 15)) { context in
-                    let dueCount = deck.cards.filter { $0.isDue(at: context.date) }.count
-
-                    NavigationLink {
-                        StudyView(cards: deck.cards)
-                            .navigationTitle(deck.name)
-                            .navigationBarTitleDisplayMode(.inline)
-                    } label: {
-                        studyActions(
-                            title: "Review due cards",
-                            subtitle: dueCount == 1 ? "1 card ready" : "\(dueCount) cards ready",
-                            icon: "clock"
-                        )
-                    }
-                    .disabled(deck.cards.isEmpty)
-                }
-
-                NavigationLink {
-                    PracticeSetupView(cards: deck.cards)
-                } label: {
-                    studyActions(
-                        title: "Practice All Cards",
-                        subtitle: "Review schedules stay the same",
-                        icon: "rectangle.stack"
-                    )
-                }
-                .disabled(deck.cards.isEmpty)
-            }
-
+            deckPrimaryLanguageSetting
+            
+            studySection
+            
             Section("Cards") {
                 if deck.cards.isEmpty {
                     Text("This deck has no cards yet.")
@@ -84,11 +58,8 @@ struct DeckDetailView: View {
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
                                 }
-
-                                Text(
-                                    card.back.split(whereSeparator: \.isNewline).joined(
-                                        separator: " . ")
-                                )
+                                let backDisplayText = card.back.split(whereSeparator: \.isNewline).joined(separator: " . ")
+                                Text(backDisplayText)
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
                                 .lineLimit(1)
@@ -109,7 +80,7 @@ struct DeckDetailView: View {
         .searchable(text: $searchText, prompt: "Search cards")
         .navigationTitle(deck.name)
         .sheet(item: $cardToEdit) { card in
-            AddCardView(deckName: deck.name, card: card) { draft in
+            AddCardView(deckName: deck.name, primaryLangCode: deck.primaryLanguageCode, card: card) { draft in
                 guard let index = deck.cards.firstIndex(where: { $0.id == card.id }) else {
                     return
                 }
@@ -136,6 +107,7 @@ struct DeckDetailView: View {
         .sheet(isPresented: $isAddCardOpen) {
             AddCardView(
                 deckName: deck.name,
+                primaryLangCode: deck.primaryLanguageCode,
                 onSave: { card in
                     deck.cards.append(card)
                 },
@@ -171,6 +143,53 @@ struct DeckDetailView: View {
         } message: { card in
             Text(card.front)
         }
+    }
+    
+    private var deckPrimaryLanguageSetting: some View {
+        Section("Deck Settings") {
+            Picker("Primary Language", selection: Binding(
+                get: { deck.primaryLanguage }, set: { deck.primaryLanguage = $0 }
+            )) {
+                Text("System Default").tag(nil as DeckLanguage?)
+                
+                ForEach(DeckLanguage.allCases, id: \.self) { lang in
+                    Text(lang.title).tag(Optional(lang))
+                }
+            }
+        }
+    }
+    
+    private var studySection: some View {
+        Section("Study") {
+            TimelineView(.periodic(from: .now, by: 15)) { context in
+                let dueCount = deck.cards.filter { $0.isDue(at: context.date) }.count
+
+                NavigationLink {
+                    StudyView(cards: deck.cards)
+                        .navigationTitle(deck.name)
+                        .navigationBarTitleDisplayMode(.inline)
+                } label: {
+                    studyActions(
+                        title: "Review due cards",
+                        subtitle: dueCount == 1 ? "1 card ready" : "\(dueCount) cards ready",
+                        icon: "clock"
+                    )
+                }
+                .disabled(deck.cards.isEmpty)
+            }
+
+            NavigationLink {
+                PracticeSetupView(cards: deck.cards)
+            } label: {
+                studyActions(
+                    title: "Practice All Cards",
+                    subtitle: "Review schedules stay the same",
+                    icon: "rectangle.stack"
+                )
+            }
+            .disabled(deck.cards.isEmpty)
+        }
+
     }
 
     private func studyActions(

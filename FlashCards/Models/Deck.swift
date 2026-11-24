@@ -10,11 +10,18 @@ import Foundation
 
 @Model
 final class Deck {
+    @Relationship(deleteRule: .cascade, inverse: \Flashcard.deck)
+    var cards: [Flashcard] = []
+
     var backupID: UUID?
     var name: String
     var createdAt: Date
-    @Relationship(deleteRule: .cascade, inverse: \Flashcard.deck)
-    var cards: [Flashcard] = []
+    var primaryLanguageCode: String? = nil
+    
+    var primaryLanguage: DeckLanguage? {
+        get { primaryLanguageCode.flatMap(DeckLanguage.init(rawValue:)) }
+        set { primaryLanguageCode = newValue?.rawValue }
+    }
     
     init(name: String, cards: [Flashcard] = []) {
         self.backupID = UUID()

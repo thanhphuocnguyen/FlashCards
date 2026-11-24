@@ -10,6 +10,7 @@ import Translation
 
 struct AddCardView: View {
     let deckName: String
+    let primaryLangCode: String?
     let onSave: (Flashcard) -> Void
     let onSaveAll: (([Flashcard]) -> Void)?
     @State private var drafts: [CardDraft]
@@ -19,11 +20,13 @@ struct AddCardView: View {
     
     init(
         deckName: String,
+        primaryLangCode: String?,
         card: Flashcard? = nil,
         onSave: @escaping (Flashcard) -> Void,
         onSaveAll: (([Flashcard]) -> Void)? = nil
     ) {
         self.deckName = deckName
+        self.primaryLangCode = primaryLangCode
         self.onSave = onSave
         self.onSaveAll = onSaveAll
         self.isEditing = card != nil
@@ -72,7 +75,8 @@ struct AddCardView: View {
                             Text("Front")
                                 .font(.subheadline.weight(.semibold))
                             
-                            TextField("e.g. 水", text: $draft.front)
+                            PreferredKeyboardField(text: $draft.front, placeholder: "e.g. 水", langCode: primaryLangCode)
+                                .frame(minHeight: 44)
                                 .accessibilityLabel("Front")
                         }
                         .padding(.vertical, 4)
@@ -151,6 +155,7 @@ struct AddCardView: View {
     var cards: [Flashcard] = []
     AddCardView(
         deckName: "Chinese Basics",
+        primaryLangCode: "zh-Hans",
         onSave: {card in
             cards.append(card)
         },
@@ -161,6 +166,7 @@ struct AddCardView: View {
     var cards: [Flashcard] = []
     AddCardView(
         deckName: "New",
+        primaryLangCode: "zh-Hans",
         onSave: {card in
             cards.append(card)
         },
@@ -173,6 +179,7 @@ struct AddCardView: View {
 #Preview("Edit card") {
     AddCardView(
         deckName: "Chinese Basics",
+        primaryLangCode: "zh-Hans",
         card: Flashcard(front: "水", back: "shuǐ\nwater"),
         onSave: { _ in }
     )

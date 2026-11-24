@@ -12,7 +12,7 @@ struct StudyView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    @AppStorage("review.hardDays") private var hardDays = 1
+    @AppStorage("review.hardHours") private var hardHours = 24
     @AppStorage("review.goodMinDays") private var goodMinDays = 3
     @AppStorage("review.goodMaxDays") private var goodMaxDays = 90
 
@@ -158,7 +158,7 @@ struct StudyView: View {
             
             VStack {
                 Button("Hard") { rate(.hard, card: card) }
-                Text("1 day")
+                Text(hardHours == 1 ? "1 hour" : "\(hardHours) hours")
             }
             
             VStack {
@@ -210,7 +210,8 @@ struct StudyView: View {
             retryCount += 1
             queue.append(card)
         case .hard:
-            schedule(card, inDays: hardDays, from: now)
+            card.nextReviewAt = now.addingTimeInterval(Double(hardHours) * 3_600)
+            card.intervalDays = (hardHours+23)/24
             completeCards += 1
         case .good:
             let days = goodInterval(for: card.intervalDays)

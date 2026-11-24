@@ -17,6 +17,7 @@ struct FlashcardsBackup: Codable {
             DeckSnapshot(
                 backupID: deck.backupID,
                 name: deck.name,
+                primaryLanguageCode: deck.primaryLanguageCode,
                 createdAt: deck.createdAt,
                 cards: deck.cards.map { card in
                     CardSnapshot(
@@ -35,6 +36,7 @@ struct FlashcardsBackup: Codable {
     struct DeckSnapshot: Codable {
         let backupID: UUID?
         let name: String
+        let primaryLanguageCode: String?
         let createdAt: Date
         let cards: [CardSnapshot]
     }

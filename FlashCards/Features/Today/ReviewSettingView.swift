@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct ReviewSettingView: View {
-    @AppStorage("review.hardDays") private var hardDays = 1
+    @AppStorage("review.hardHours") private var hardHours = 24
     @AppStorage("review.goodMinDays") private var goodMinDays = 3
     @AppStorage("review.goodMaxDays") private var goodMaxDays = 90
     
     var body: some View {
+        let hourOptions = Set([1, 3, 6, 12, 24, 48, 72, hardHours]).sorted()
         Form {
             Section("Review Intervals") {
-                Stepper("Hard: \(hardDays) days",
-                        value: $hardDays, in: 1...goodMinDays
-                )
+                Picker("Hard delay", selection: $hardHours) {
+                    ForEach(hourOptions, id: \.self) { hours in
+                        Text(hours == 1 ? "1 hour" : "\(hours) hours")
+                            .tag(hours)
+                    }
+                }
                 
                 Stepper("Good minimum: \(goodMinDays) days",
-                        value: $goodMinDays, in: hardDays...goodMaxDays
+                        value: $goodMinDays, in: 1...goodMaxDays
                 )
                 
                 Stepper("Good maximum: \(goodMaxDays) days",
